@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/horizontal_layout_view"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/coverImageView"
+        style="@style/image_decoration"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_170sdp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="@dimen/_5sdp" />
+
+    <TextView
+        android:id="@+id/BookNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:maxLines="1"
+        android:text="Book Name"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/authorNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:fontFamily="@font/roboto"
+        android:maxLines="1"
+        android:text="Author Name"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/languageTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:fontFamily="@font/roboto"
+        android:text="Language"
+        android:textSize="@dimen/_10ssp" />
+</LinearLayout>

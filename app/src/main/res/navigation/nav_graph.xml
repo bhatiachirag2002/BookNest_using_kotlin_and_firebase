@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.bhatia.booknest.ui.fragment.auth_fragment.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popUpTo="@id/nav_graph" />
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popUpTo="@id/nav_graph" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.bhatia.booknest.ui.fragment.auth_fragment.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_signupFragment"
+            app:destination="@id/signupFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popEnterAnim="@android:anim/slide_in_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.bhatia.booknest.ui.fragment.auth_fragment.SignupFragment"
+        android:label="SignupFragment" >
+        <action
+            android:id="@+id/action_signupFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_signupFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.bhatia.booknest.ui.fragment.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_homeFragment_to_BookDetailFragment"
+            app:destination="@id/bookDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popEnterAnim="@android:anim/slide_in_left" />
+        <action
+            android:id="@+id/action_homeFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popEnterAnim="@android:anim/slide_in_left" />
+        <action
+            android:id="@+id/action_homeFragment_to_seeAllBookFragment"
+            app:destination="@id/seeAllBookFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popEnterAnim="@android:anim/slide_in_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/PDFFragment"
+        android:name="com.bhatia.booknest.ui.fragment.PDFFragment"
+        android:label="fragment_p_d_f"
+        tools:layout="@layout/fragment_p_d_f" />
+    <fragment
+        android:id="@+id/bookDetailsFragment"
+        android:name="com.bhatia.booknest.ui.fragment.BookDetailsFragment"
+        android:label="fragment_book_details"
+        tools:layout="@layout/fragment_book_details" >
+        <action
+            android:id="@+id/action_bookDetailsFragment_to_PDFFragment"
+            app:destination="@id/PDFFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popEnterAnim="@android:anim/slide_in_left"/>
+    </fragment>
+    <fragment
+        android:id="@+id/favouriteFragment"
+        android:name="com.bhatia.booknest.ui.fragment.FavouriteFragment"
+        android:label="fragment_favourite"
+        tools:layout="@layout/fragment_favourite">
+        <action
+            android:id="@+id/action_favouriteFragment_to_BookDetailFragment"
+            app:destination="@id/bookDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popEnterAnim="@android:anim/slide_in_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.bhatia.booknest.ui.fragment.auth_fragment.ForgotPasswordFragment"
+        android:label="fragment_forgot_password"
+        tools:layout="@layout/fragment_forgot_password" />
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.bhatia.booknest.ui.fragment.auth_fragment.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/seeAllBookFragment"
+        android:name="com.bhatia.booknest.ui.fragment.SeeAllBookFragment"
+        android:label="fragment_see_all_book"
+        tools:layout="@layout/fragment_see_all_book" >
+        <action
+            android:id="@+id/action_seeAllBookFragment_to_bookDetailsFragment"
+            app:destination="@id/bookDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popEnterAnim="@android:anim/slide_in_left" />
+    </fragment>
+</navigation>
