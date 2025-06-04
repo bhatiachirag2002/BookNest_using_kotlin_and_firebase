@@ -26,6 +26,17 @@ class FirebaseAuthentication {
         }
     }
 
+
+    fun logout(): Result<User?> {
+        return try {
+            auth.signOut() // Firebase logout
+            Result.success(null) // Successfully logged out, no user to return
+        } catch (e: Exception) {
+            Result.failure(Exception("Logout failed: ${e.message}"))
+        }
+    }
+
+
     suspend fun login(email: String, password: String): Result<User?> {
         return try {
             val authResult = auth.signInWithEmailAndPassword(email, password).await()
@@ -40,6 +51,8 @@ class FirebaseAuthentication {
         }
 
     }
+
+
 
     suspend fun forgetPassword(email: String): Result<String> {
         return try {

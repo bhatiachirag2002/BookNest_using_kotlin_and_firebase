@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "2343485539-5s8hklhvirbq3kcti5mbr1vaenc6ao2e.apps.googleusercontent.com",
+          "client_id": "2343485539-l24vrpjjk3lkqheojmebkuo7ntlbdllu.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.bhatia.booknest",
-            "certificate_hash": "cbbe177873113390b94b7f90ddb096fcd740e5bd"
+            "certificate_hash": "7b66080823f9f69b47b5086dd5164044553c341c"
           }
         },
         {

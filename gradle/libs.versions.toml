@@ -1,25 +1,28 @@
 [versions]
-agp = "8.5.0"
-androidPdfViewer = "2.0"
-kotlin = "1.9.0"
-coreKtx = "1.13.1"
+agp = "8.10.1"
+androidPdfViewer = "6.1"
+kotlin = "2.1.0"
+coreKtx = "1.16.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
 material = "1.12.0"
-activity = "1.9.3"
-constraintlayout = "2.1.4"
+activity = "1.10.1"
+constraintlayout = "2.2.1"
 googleGmsGoogleServices = "4.4.2"
-firebaseAuth = "23.1.0"
-firebaseFirestore = "25.1.1"
+firebaseAuth = "23.2.1"
+firebaseFirestore = "25.1.4"
 sdpVersion = "1.1.1"
-lifecycleVersion = "2.8.7"
+lifecycleVersion = "2.9.0"
 kotlinxCoroutines = "1.9.0"
-navVersion = "2.8.4"
+navVersion = "2.9.0"
 glide = "4.16.0"
-firebaseMessaging = "24.1.0"
+firebaseMessaging = "24.1.1"
 junitJupiter = "5.8.1"
+retrofit = "2.9.0"
+ksp = "2.0.21-1.0.27"
+roomVersion = "2.7.1"
 
 [libraries]
 android-pdf-viewer = { module = "com.github.Foysalofficial:pdf-viewer-android", version.ref = "androidPdfViewer" }
@@ -57,6 +60,13 @@ glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "gl
 firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging", version.ref = "firebaseMessaging" }
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
 
+#ROOM
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomVersion" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomVersion" }
+
+#retrofit
+retrofit2-retrofit = {module="com.squareup.retrofit2:retrofit", version.ref="retrofit"}
+retrofit2-converter-gson = {module="com.squareup.retrofit2:converter-gson", version.ref="retrofit"}
 
 
 [plugins]
@@ -64,4 +74,4 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
 navigation-safe-args = { id = "androidx.navigation.safeargs", version.ref = "navVersion" }
-
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

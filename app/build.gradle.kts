@@ -3,17 +3,18 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
     alias(libs.plugins.navigation.safe.args)
+    alias(libs.plugins.ksp)
     id ("kotlin-parcelize")
 }
 
 android {
     namespace = "com.bhatia.booknest"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.bhatia.booknest"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -76,8 +77,13 @@ dependencies {
 
     //glide
     implementation(libs.glide)
-
     implementation (libs.android.pdf.viewer)
-    implementation("com.squareup.okhttp3:okhttp:4.9.3")
 
+    //retrofit
+    implementation(libs.retrofit2.retrofit)
+    implementation(libs.retrofit2.converter.gson)
+
+    //room
+    implementation (libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
 }

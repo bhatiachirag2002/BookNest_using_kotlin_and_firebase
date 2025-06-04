@@ -25,7 +25,10 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import android.Manifest
 import android.os.Build
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.WindowInsetsControllerCompat
+import com.example.budgettracker.db.AppDB
+import com.google.firebase.auth.FirebaseAuth
 
 
 class MainActivity : AppCompatActivity() {
@@ -51,7 +54,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupViewModel() {
-        val appRepo = AppRepo(FirebaseSource(), FirebaseAuthentication(), this)
+        val appRepo = AppRepo(FirebaseSource(), FirebaseAuthentication(),AppDB(this), this)
         val viewModelFactory = AppViewModelFactory(appRepo)
         appViewModel = ViewModelProvider(this, viewModelFactory)[AppViewModel::class.java]
     }
@@ -73,7 +76,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.action_Logout -> {
-                Firebase.auth.signOut()
+                appViewModel.logout()
                 navController.navigate(R.id.action_homeFragment_to_loginFragment)
                 Toast.makeText(this, "Logout successfully", Toast.LENGTH_SHORT).show()
                 true

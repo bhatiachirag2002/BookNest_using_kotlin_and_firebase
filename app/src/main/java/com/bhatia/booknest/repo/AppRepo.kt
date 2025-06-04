@@ -1,24 +1,29 @@
 package com.bhatia.booknest.repo
 
 import android.content.Context
+import com.bhatia.booknest.api.ApiInterface
+import com.bhatia.booknest.api.ApiUtilites
 import com.bhatia.booknest.auth.FirebaseAuthentication
 import com.bhatia.booknest.db.FirebaseSource
 import com.bhatia.booknest.db.SharedPreferences
 import com.bhatia.booknest.model.Books
+import com.bhatia.booknest.model.PdfEntity
 import com.bhatia.booknest.model.User
+import com.example.budgettracker.db.AppDB
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import okhttp3.OkHttpClient
-import okhttp3.Request
+import java.io.File
 
 class AppRepo(
     private val firebaseSource: FirebaseSource,
     private val firebaseAuth: FirebaseAuthentication,
-    context: Context
+    db: AppDB,
+    private val context: Context
 ) {
     private val auth = firebaseAuth.auth.currentUser?.uid
-    private val client = OkHttpClient()
+    private val apiInterface = ApiUtilites.getInstance().create(ApiInterface::class.java)
     private val sharedPreferences = SharedPreferences(context)
+    private val pdfDao = db.getPdfDao()
 
     // Auth
 
@@ -28,6 +33,10 @@ class AppRepo(
 
     suspend fun login(email: String, password: String): Result<User?> {
         return firebaseAuth.login(email, password)
+    }
+
+     fun logout(): Result<User?> {
+        return firebaseAuth.logout()
     }
 
     suspend fun forgetPassword(email: String): Result<String> {
@@ -59,17 +68,42 @@ class AppRepo(
     }
 
     //PDF
-    suspend fun downloadPdf(url: String): ByteArray? {
-        return withContext(Dispatchers.IO) {
-            val request = Request.Builder().url(url).build()
-            val response = client.newCall(request).execute()
-            return@withContext if (response.isSuccessful) {
-                response.body?.bytes()
-            } else {
-                null
-            }
+    suspend fun getOrDownloadPdf(bookId: String, url: String): ByteArray? {
+        val existing = getPdfByBookId(bookId)
+        return if (existing != null) {
+            val file = File(existing.filePath)
+            if (file.exists()) file.readBytes() else downloadAndSavePdf(bookId, url)
+        } else {
+            downloadAndSavePdf(bookId, url)
         }
     }
+
+
+    private suspend fun getPdfByBookId(bookId: String) = pdfDao.getPdfByBookId(bookId)
+
+    private suspend fun insertPdf(pdf: PdfEntity) = pdfDao.insertPdf(pdf)
+
+    private suspend fun downloadAndSavePdf(bookId: String, url: String): ByteArray? {
+        return withContext(Dispatchers.IO) {
+            val response = apiInterface.downloadPdfFile(url)
+            if (response.isSuccessful) {
+                val bytes = response.body()?.bytes()
+                if (bytes != null) {
+                    val fileName = "book_$bookId.pdf"
+                    val file = File(context.filesDir, fileName)
+                    file.writeBytes(bytes)
+
+                    // Save PDF info in Room
+                    insertPdf(PdfEntity(bookId, file.absolutePath))
+
+                    return@withContext bytes
+                }
+            }
+            null
+        }
+    }
+
+
 
     fun saveLastReadPage(pageNumber: Int) {
         sharedPreferences.saveLastReadPage(pageNumber)

@@ -26,9 +26,9 @@ class AppViewModel(private val appRepo: AppRepo) : ViewModel() {
         }
     }
 
-    fun downloadPdf(url: String, onResult: (ByteArray?) -> Unit) {
+    fun downloadPdf(bookId: String, url: String, onResult: (ByteArray?) -> Unit) {
         viewModelScope.launch {
-            val pdfBytes = appRepo.downloadPdf(url)
+            val pdfBytes = appRepo.getOrDownloadPdf(bookId, url)
             onResult(pdfBytes)
         }
     }
@@ -69,6 +69,13 @@ class AppViewModel(private val appRepo: AppRepo) : ViewModel() {
     fun login(email: String, password: String) {
         viewModelScope.launch {
             val result = appRepo.login(email, password)
+            _authResult.value = result
+        }
+    }
+
+    fun logout() {
+        viewModelScope.launch {
+            val result = appRepo.logout()
             _authResult.value = result
         }
     }

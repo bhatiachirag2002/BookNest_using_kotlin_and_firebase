@@ -46,7 +46,7 @@ class PDFFragment : Fragment() {
         val lastReadPage = viewModel.getLastReadPage()
 
 
-        viewModel.downloadPdf(chapterLink) { pdfBytes ->
+        viewModel.downloadPdf(chapterName,chapterLink) { pdfBytes ->
             if (pdfBytes != null) {
                 val pdfFile = File(requireContext().cacheDir, "downloaded_pdf.pdf")
                 pdfFile.writeBytes(pdfBytes)
